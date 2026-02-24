@@ -1,0 +1,230 @@
+:root {
+  color-scheme: dark;
+  --bg: #050816;
+  --bg-soft: #0b1020;
+  --accent: #4f46e5;
+  --accent-soft: rgba(79, 70, 229, 0.16);
+  --accent-strong: rgba(79, 70, 229, 0.32);
+  --text: #e5e7eb;
+  --text-muted: #9ca3af;
+  --border: #1f2933;
+  --danger: #f97373;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: radial-gradient(circle at top, #111827 0, #020617 40%, #000 100%);
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.page {
+  width: 100%;
+  max-width: 640px;
+  padding: 1.5rem;
+}
+
+.card {
+  background: linear-gradient(135deg, rgba(79, 70, 229, 0.08), rgba(15, 23, 42, 0.9));
+  border-radius: 1.25rem;
+  border: 1px solid var(--border);
+  padding: 1.75rem 1.5rem 1.5rem;
+  box-shadow:
+    0 22px 45px rgba(15, 23, 42, 0.75),
+    0 0 0 1px rgba(15, 23, 42, 0.9);
+  backdrop-filter: blur(22px);
+}
+
+.title {
+  margin: 0 0 1.5rem;
+  font-size: 1.75rem;
+  letter-spacing: 0.06em;
+}
+
+.search {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.search-label {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--text-muted);
+}
+
+.search-row {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.search-row input {
+  flex: 1;
+  padding: 0.7rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--bg-soft);
+  color: var(--text);
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.search-row input::placeholder {
+  color: var(--text-muted);
+}
+
+.search-row input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent-soft);
+  background: #020617;
+}
+
+button {
+  border: none;
+  border-radius: 999px;
+  padding: 0.7rem 1.3rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  background: radial-gradient(circle at 10% 0, #6366f1, #4f46e5);
+  color: white;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
+  white-space: nowrap;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 22px var(--accent-strong);
+  filter: brightness(1.04);
+}
+
+button:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.result {
+  border-radius: 0.9rem;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(31, 41, 55, 0.9);
+  padding: 1.1rem 1rem 1rem;
+  min-height: 4.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.95rem;
+}
+
+.header-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  margin-bottom: 0.2rem;
+}
+
+.word {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.pronunciation {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.definition-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+  margin-bottom: 0.1rem;
+}
+
+.definition {
+  line-height: 1.5;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.45rem;
+}
+
+.chip {
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  border: 1px solid rgba(55, 65, 81, 0.9);
+  background: rgba(15, 23, 42, 0.9);
+  font-size: 0.8rem;
+}
+
+.chip--accent {
+  border-color: rgba(129, 140, 248, 0.9);
+  background: rgba(79, 70, 229, 0.08);
+}
+
+.muted {
+  color: var(--text-muted);
+}
+
+.error {
+  color: var(--danger);
+}
+
+.result--empty {
+  justify-content: center;
+}
+
+.result--loading::after {
+  content: "";
+  margin-top: 0.7rem;
+  width: 48px;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  animation: shimmer 1s linear infinite;
+}
+
+@keyframes shimmer {
+  from {
+    transform: translateX(-16px);
+  }
+  to {
+    transform: translateX(16px);
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 1.5rem 1.1rem 1.25rem;
+  }
+
+  .search-row {
+    flex-direction: column;
+  }
+
+  button {
+    width: 100%;
+  }
+}
+
